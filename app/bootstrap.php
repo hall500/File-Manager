@@ -9,3 +9,4 @@
   });
 
   Core::instantiate();
+  //Core::debug(get_required_files());

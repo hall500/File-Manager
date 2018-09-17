@@ -2,15 +2,19 @@
   class Pages extends Controller {
 
     public function __construct(){
-      $this->stateModel = $this->model('User');
     }
 
     public function index(){
-      $this->view('index', ['name' => 'Jenny Smith']);
+      $data = [
+        'title' => 'Home Page'
+      ];
+      $this->view('index', $data);
     }
 
-    public function about($name, $id){
-      echo 'Your Name is ' . $name; echo '<br>';
-      echo 'Your id is '. $id;
+    public function about(){
+      $data = [
+        'title' => 'About Page'
+      ];
+      $this->view('about', $data);
     }
   }
