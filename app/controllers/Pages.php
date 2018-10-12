@@ -15,6 +15,6 @@
       $data = [
         'title' => 'About Page'
       ];
-      $this->view('about', $data);
+      return $this->view('about', $data);
     }
   }

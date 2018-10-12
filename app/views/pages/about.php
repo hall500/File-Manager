@@ -1,5 +1,1 @@
-<?php require APP_ROOT . '/views/inc/header.php'; ?>
-
-<h1><?= $title ?></h1>
-
-<?php require APP_ROOT . '/views/inc/footer.php'; ?>
+<h1>This is the about page</h1>
