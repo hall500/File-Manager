@@ -1,7 +1,8 @@
 <?php
+
   class Core {
 		private static $instance = NULL;
-	  protected $currentController = 'Pages';
+	  protected $currentController = 'Home';
 	  protected $currentMethod = 'index';
 		protected $params = [];
 		
@@ -21,7 +22,7 @@
 			  unset($url[0]);
 			}
 		  
-		  require_once('../app/controllers/' . $this->currentController . '.php');
+		  require_once('../app/controllers/' . ucwords($this->currentController) . '.php');
 		  $this->currentController = new $this->currentController;
 		  
 		  //Check for Controller Method
@@ -36,7 +37,7 @@
 			$this->params = $url ? array_values($url) : [];
 
 			$result = call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
-			Core::debug($result);
+			Core::debug($result, true);
 	  }
 	  
 	  protected function getUrl(){
@@ -48,11 +49,16 @@
 		  }
 		}
 		
-		public static function debug($test, $die = 0){
+		/**
+		 * Function to test data at specific code points
+		 * @param Mixed $test Data for testing
+		 * @param Boolean $die End code execution
+		 */
+		public static function debug($test, $die = false){
 			print_r("<pre>");
 			print_r($test);
 			print_r("</pre>");
-			if($die == 1){
+			if($die == true){
 				die();
 			}
 		}

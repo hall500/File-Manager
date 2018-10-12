@@ -1,4 +1,5 @@
 <?php
+  //Parse in Configuration file
   $config = parse_ini_file('config.ini');
   extract($config);
   //App Root
