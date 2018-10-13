@@ -148,6 +148,9 @@
     }
   }
 
+  function create_file($file_path = '', $file_name = '', $file_content = null){
+  }
+
   /**
 	 * Get all files in a specified folder and require them
 	 * get_files($folder): void

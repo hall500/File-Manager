@@ -1,4 +1,4 @@
-<h1><?= $title ?></h1>
+<h1><?php print_r($title) ?></h1>
 <h3>This is the about page</h3>
 
 <form action="./home/about" method="post">

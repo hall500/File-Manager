@@ -1,4 +1,11 @@
 <?php
+  /**
+   * Entering PHP Command Line
+   */
+  if('cli' == php_sapi_name()){
+    exit();
+  }
+  
   //Parse in Configuration file
   $config = parse_ini_file('config.ini');
   extract($config);

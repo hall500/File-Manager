@@ -3,29 +3,20 @@
 
     public function __construct(){
       //Define All required models here
-      $this->users = $this->model('Users');
-      $this->feeds = $this->model('TwitterFeeds');
-      $this->widget = $this->widget('components/Alert');
     }
 
     public function index(){
-      //Core::debug(get_object_vars($this->users), true);
       $data = [
-        'title' => 'Home Page',
-        'user' => ''//$this->feeds->delete(2)
+        'title' => 'Home Page'
       ];
       $this->view('index', $data);
     }
 
     public function about(){
       $data = [
-        'title' => $this->widget->run(),
+        'title' => 'About Page'
       ];
-
-      if(Request::get()->has_post()){
-        $data = Request::get()->post();
-        $this->redirect('contact');
-      }
+      
       $this->view('about', $data);
     }
 

@@ -69,12 +69,19 @@
       return $clean_attributes;
     }
 
+    /**
+     * Saves or Updates data attributes to database. It Updates $this->id is set 
+     */
     /*--Create,Update and Delete methods--*/
     public function save() {
       // A new record won't have an id yet.
       return isset($this->id) ? $this->update() : $this->create();
     }
 
+    /**
+   * Insert data into database table 
+   * @return boolean returns boolean true if data is saved successfully
+   */
     public function create() {
       // Don't forget your SQL syntax and good habits:
       // - INSERT INTO table (key, key) VALUES ('value', 'value')
@@ -99,6 +106,11 @@
       return false;
     }
 
+    /**
+   * Select data from database
+   * @param Int $id Where condition for limiting the size of rows returned
+   * @return Boolean returns boolean true if the update is successful
+   */
     public function update($id="") {
       $attributes = $this->sanitized_attributes();
       if(empty($id) && isset($attributes['id'])){
@@ -124,10 +136,42 @@
       if(!$this->db->execute()) return false;
     }
 
-    public function read(){
+    /**
+   * Select data from database
+   * @param Array $columns table fields to select from the table
+   * @param String $where Where condition for limiting the size of rows returned
+   * @return Array returns an array of rows from the database table, if nothing is found returns 0
+   */
+    public function read($columns = [], $where = [], $condition = 'AND'){
+      $sql = "SELECT ";
+      $sql .= join(",", array_values($columns));
+      $sql .= " FROM ". $this->table;
 
+      $attribute_pairs = array();
+      foreach($where as $key => $value) {
+        $attribute_pairs[] = "{$key}=:{$key}";
+      }
+
+      if(!empty($where)){
+          $sql .= " WHERE ";
+          $sql .= join(" $condition ", $attribute_pairs);
+      }
+
+      $this->db->query($sql);
+
+      foreach($where as $key => $value){
+        $this->db->bind(":".$key, $value);
+      }
+
+      return $this->db->resultSet();
     }
 
+    /**
+   * Delete a row from a database table
+   * @param String $table Table to delete row from
+   * @param Int $id Row ID to delete
+   * @return boolean
+   */
     public function delete($id=0) {
         $sql = "DELETE FROM ". $this->table;
         $sql .= " WHERE id = :id";
