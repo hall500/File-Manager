@@ -3,7 +3,7 @@
   $config = parse_ini_file('config.ini');
   extract($config);
   //App Root
-  define('APP_ROOT', dirname(dirname(__FILE__)));
+  define('APP_ROOT', dirname(dirname(__FILE__)) . '/');
 
   //App Version
   define('APP_VERSION', $version);

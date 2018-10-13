@@ -1,5 +1,6 @@
 <?php
 
+
   /**
    * Test Given Data
    */
@@ -10,6 +11,22 @@
 
     if($kill == true){
       die();
+    }
+  }
+
+  /**
+   * Print out an error using defined layout
+   */
+  function error($data = ['title'=>'', 'description' => ''], $layout = 'site'){
+    if(!empty($data)){
+     extract($data);
+    }
+    $content = APP_ROOT . 'views/error/index.php';
+    if(file_exists($content)){
+      require_once APP_ROOT . 'views/_layout/'. $layout . '.php';
+      exit();
+    }else{
+      die("An Error has Occurred");
     }
   }
   
@@ -25,16 +42,6 @@
     }else{
       require APP_ROOT . '/views/_inc/' . $file . '.php';
     }
-  }
-
-  /**
-   * Redirect to a different Page: redirect($goto)
-   * @param string:goto Page to redirect to
-   * @return void
-   */
-  function redirect($goto){
-    header("Location: " . $goto);
-    exit();
   }
 
   /**
@@ -76,7 +83,7 @@
    * @return string
    */
   function post($data = ''){
-    return (isset($_POST[$data])) ? trim($_POST[$data]) : '';
+    return (isset($_POST[$data])) ?  : '';
   }
 
   /**
@@ -162,4 +169,17 @@
 				closedir($dh);
 			}
 		}
-	}
+  }
+  
+  /**
+   * Convert Text from Camel Case to Snake Case
+   * @param String $input String input to convert example: TwitterFeeds, Users
+   */
+  function from_camel_case($input = '') {
+    preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
+    $ret = $matches[0];
+    foreach ($ret as &$match) {
+      $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
+    }
+    return implode('_', $ret);
+  }
