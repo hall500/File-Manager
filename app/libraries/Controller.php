@@ -3,7 +3,7 @@
    * Base Controller Class
    * Loads Models and Views
    */
-   class Controller {
+   abstract class Controller {
      /**
       * Defines the layout of the site to use
       * @var $layout defines the application layout to use
@@ -29,6 +29,27 @@
           'description' => 'Ops! It seems the model <strong>' . ucwords($model) . '</strong> does not exist<br>Please Create It first'
         ]);
       }
+     }
+
+     /***
+      * Load a new Widget Class
+      */
+     protected function widget($widget = ''){
+       $url = explode('/',$widget);
+       $widget_name = $url[count($url) - 1];
+       //Check if $widget is available
+       if(!empty($widget) && is_string($widget)){
+         $widget_path = APP_ROOT . 'widgets/' . $widget . '.php';
+         if(file_exists($widget_path)){
+           include_once $widget_path;
+           return new $widget_name();
+         }
+
+         error([
+          'title' => 'Widget Not Found',
+          'description' => 'Ops! It seems the widget <strong>' . ucwords($model) . '</strong> does not exist<br>Please Create It first'
+        ]);
+       }
      }
 
      /**

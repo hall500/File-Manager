@@ -38,7 +38,13 @@
    */
   function _inc($file, $require = false){
     if($require !== true){
-      include APP_ROOT . '/views/_inc/' . $file . '.php';
+      $success = include APP_ROOT . '/views/_inc/' . $file . '.php';
+      if(!$success){
+        error([
+          'title' => 'File Not Found',
+          'description' => 'The path to file you are looking for does not exist'
+        ]);
+      }
     }else{
       require APP_ROOT . '/views/_inc/' . $file . '.php';
     }
@@ -75,15 +81,6 @@
       return $_SESSION['user_id'];
     }
     return 0;
-  }
-
-  /**
-   * Return trimmed out data from $_POST
-   * @param mixed:data data passed from post method
-   * @return string
-   */
-  function post($data = ''){
-    return (isset($_POST[$data])) ?  : '';
   }
 
   /**

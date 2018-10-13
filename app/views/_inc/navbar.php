@@ -13,7 +13,7 @@
           <a class="nav-link" href="./home/about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./contact">Contact</a>
+          <a class="nav-link" href="./home/contact">Contact</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Login</a>

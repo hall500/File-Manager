@@ -17,12 +17,12 @@
 			$url = $this->getUrl();
 		  
 		  //Look in controllers for first value
-		  if(file_exists('../app/controllers/'.ucwords($url[0]).'.php')){
+		  if(file_exists(APP_ROOT . 'controllers/'.ucwords($url[0]).'.php')){
 			  $this->currentController = ucwords($url[0]);
 			  unset($url[0]);
 			}
 		  
-		  require_once('../app/controllers/' . ucwords($this->currentController) . '.php');
+		  require_once(APP_ROOT . 'controllers/' . ucwords($this->currentController) . '.php');
 		  $this->currentController = new $this->currentController;
 		  
 		  //Check for Controller Method
@@ -37,7 +37,7 @@
 			$this->params = $url ? array_values($url) : [];
 
 			$result = call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
-			Core::debug($result, true);
+			//Core::debug($result, true);
 	  }
 	  
 	  protected function getUrl(){

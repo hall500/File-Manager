@@ -6,6 +6,6 @@
 
   include $content;
 
-  _inc('main/footer');
+  _inc('main/footer', true);
   
 ?>

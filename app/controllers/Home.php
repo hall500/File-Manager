@@ -5,6 +5,7 @@
       //Define All required models here
       $this->users = $this->model('Users');
       $this->feeds = $this->model('TwitterFeeds');
+      $this->widget = $this->widget('components/Alert');
     }
 
     public function index(){
@@ -18,8 +19,7 @@
 
     public function about(){
       $data = [
-        'title' => 'About Page',
-        'has_post' => Request::get()->has_post()
+        'title' => $this->widget->run(),
       ];
 
       if(Request::get()->has_post()){
