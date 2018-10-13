@@ -14,7 +14,8 @@
     $cmd = 'php handler.php ' . $argv[1] . ' ' . $argv[2];
     $command = escapeshellcmd($cmd);
     $output = shell_exec($command);
-    print $output;
+    print $output . "\n";
+    exit();
   }
 
   //Load Config
