@@ -15,74 +15,29 @@
   }
 
   /**
-   * Print out an error using defined layout
+   * Prints Data out if it exists
    */
-  function error($data = ['title'=>'', 'description' => ''], $layout = 'site'){
-    if(!empty($data)){
-     extract($data);
-    }
-    $content = APP_ROOT . 'views/error/index.php';
-    if(file_exists($content)){
-      require_once APP_ROOT . 'views/_layout/'. $layout . '.php';
-      exit();
-    }else{
-      die("An Error has Occurred");
-    }
+  function getData($name = '', $default = 'No Default'){
+    return !empty($name) ? $name : $default;
   }
   
   /**
    * Include a required file: _inc($file, $require = false)
    * @param string $file include desired php file fragment
+   * @param array $data add external data to the included file
    * @param boolean $require decides whether to require the file or not
    * @return void
    */
-  function _inc($file, $require = false){
+  function _inc($file, $data = [], $require = false){
+    if(!empty($data)){
+      extract($data);
+    }
+
     if($require !== true){
       include APP_ROOT . '/views/_inc/' . $file . '.php';
     }else{
       require APP_ROOT . '/views/_inc/' . $file . '.php';
     }
-  }
-
-  /**
-   * Verify if user is logged in already
-   * @return boolean
-   */
-  function is_user(){
-    if(!isset($_SESSION['user_logged_in'])){
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * Verify if user is not logged in
-   * @return boolean
-   */
-  function is_guest(){
-    if(isset($_SESSION['user_logged_in'])){
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * Get Logged in Users Id
-   * @return int:id
-   */
-  function get_user_id(){
-    if(isset($_SESSION['user_id'])){
-      return $_SESSION['user_id'];
-    }
-    return 0;
-  }
-
-  /**
-   * Return to Home
-   * @return void
-   */
-  function goHome(){
-    redirect("../");
   }
 
   /**

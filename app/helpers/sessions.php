@@ -9,7 +9,7 @@
    * @param string $message Message to display
    * @param string $class Alert class to display 
    */
-  function flash($name = '', $message = '', $class = 'alert alert-success'){
+  function flash($name = '', $message = '', $class = 'alert alert-success' ,$script = false){
     if(!empty($name)){
       if(!empty($message) && empty($_SESSION[$name])){
         if(!empty($_SESSION[$name])){
@@ -20,17 +20,34 @@
           unset($_SESSION[$name . '_class']);
         }
 
+        if(!empty($_SESSION[$name . '_script'])){
+          unset($_SESSION[$name . '_script']);
+        }
+
         $_SESSION[$name] = $message;
         $_SESSION[$name. '_class'] = $class;
+        if($script === true) {
+          $_SESSION[$name. '_script'] = 
+          "<script>
+              const flash = document.getElementById('msg_flash');
+              window.setTimeout(() => {
+                flash.style.display = 'none';
+              }, 2000);
+          </script>";
+        }
       }elseif(empty($message) && !empty($_SESSION[$name])){
         $class = !empty($_SESSION[$name . '_class']) ? $_SESSION[$name . '_class'] : '';
+        $script = !empty($_SESSION[$name . '_script']) ? $_SESSION[$name . '_script'] : '';
         echo "
-        <div class='col-md-12>
+        <div class='col-md-12'>
           <div class='$class' id='msg_flash'>$_SESSION[$name]</div>
         </div>
+        $script
         ";
+
         unset($_SESSION[$name]);
         unset($_SESSION[$name . '_class']);
+        unset($_SESSION[$name . '_script']);
       }
     }
   }
