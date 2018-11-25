@@ -3,8 +3,9 @@
    * Base Model Class
    */
    class Model {
-     private $table = '';
+     protected $table = '';
      protected $db;
+     protected $page_limit = 10;
 
     public function __construct(){
       $this->table = from_camel_case(get_called_class());
@@ -182,5 +183,23 @@
         
         if(!$this->db->execute()) return false;
     }	
+
+    public function pagination($page = 0){
+      if($page > 0){
+        $page_diff = (($page * $this->page_limit) - $this->page_limit);
+        return " LIMIT $page_diff, {$this->page_limit}";
+      }
+    }
+
+    public function page_count($total_rows = 0){
+      return ceil($total_rows/$this->page_limit);
+    }
+
+    public static function __callStatic($method, $args){
+      if (preg_match('/^findBy(.+)$/', $method, $matches)) {
+        var_dump($matches);
+        //return static::find(array('field' => $matches[1], 'value' => $args[0]));
+      }
+    }
    }
 
