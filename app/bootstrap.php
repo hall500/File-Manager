@@ -34,6 +34,6 @@
     require_once 'libraries/' . $className . '.php';
   });
 
-  //Instantiate the Core
+  //Instantiate the App
   App::instantiate();
 

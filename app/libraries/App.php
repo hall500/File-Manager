@@ -8,7 +8,7 @@
 		
 		public static function instantiate(){
 			if(self::$instance == NULL){
-				self::$instance = new Core();
+				self::$instance = new App();
 			}
 			return self::$instance;
 		}
