@@ -2,7 +2,7 @@
   /**
    * Setting up controller
    */
-  class ControllerName extends Controller {
+  class ControllerNameController extends Controller {
     /**
      * Models and Widgets are initialized Here
      */
