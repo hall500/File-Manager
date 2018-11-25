@@ -103,16 +103,15 @@
        }else{
          //Check if a specific path value is provided
          if(strpos($view, '/') === false){
-			$class_name =  str_replace("Controller","",get_called_class());
-           $view_path = APP_ROOT . 'views/' . $class_name . '/' . $view . '.php';
+			     $class_name =  str_replace("Controller","",get_called_class());
+           $content = APP_ROOT . 'views/' . $class_name . '/' . $view . '.php';
          }else{
-           $view_path = APP_ROOT . 'views/' . $view . '.php';
+           $content = APP_ROOT . 'views/' . $view . '.php';
          }
        }
        
        //Check if file path exists in the views folder
-       if(file_exists($view_path)){
-         $content = $view_path;
+       if(file_exists($content)){
          require_once APP_ROOT . 'views/_layout/' . $this->layout . '.php';
          exit();
        }

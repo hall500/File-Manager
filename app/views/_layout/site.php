@@ -58,7 +58,7 @@
     <?php 
 
       //_inc('file');
-
+      
       include $content;
       
     ?>
