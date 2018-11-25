@@ -1,5 +1,5 @@
 <?php
-  class Home extends Controller {
+  class HomeController extends Controller {
 
     public function __construct(){
       //Define All required models here

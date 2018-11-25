@@ -30,6 +30,28 @@
         ]);
       }
      }
+	 
+	 /**
+      * Load a new package class
+      * @param String $model Gets the required package class
+      * @return Package new $package() returns the called package classs
+      */
+     protected function package($package = ''){
+      //Checks if $model is set 
+      if(!empty($package) && is_string($package)){
+        $package_path = APP_ROOT . 'packages/' . ucwords($package) . '.php';
+        if(file_exists($model_path)){
+          require_once $package;
+          return new $package();
+        }
+		
+		/*
+        error([
+          'title' => 'Package Not Found',
+          'description' => 'Ops! It seems the package <strong>' . ucwords($package) . '</strong> does not exist<br>Please Create It first'
+        ]);*/
+      }
+     }
 
      /***
       * Load a new Widget Class
@@ -81,7 +103,8 @@
        }else{
          //Check if a specific path value is provided
          if(strpos($view, '/') === false){
-           $view_path = APP_ROOT . 'views/' . get_called_class() . '/' . $view . '.php';
+			$class_name =  str_replace("Controller","",get_called_class());
+           $view_path = APP_ROOT . 'views/' . $class_name . '/' . $view . '.php';
          }else{
            $view_path = APP_ROOT . 'views/' . $view . '.php';
          }

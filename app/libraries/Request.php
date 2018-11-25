@@ -64,4 +64,23 @@
 
       return isset($params[$name]) ? $params[$name] : $defaultValue;
     }
+	
+	public function validate(){
+		foreach($this->_bodyParams as $param){
+			switch(true){
+				case is_int($param): 
+				$type = FILTER_VALIDATE_INT;
+                break;
+				case is_float($param): 
+				$type = FILTER_VALIDATE_FLOAT;
+                break;
+				default: 
+				$type = FILTER_VALIDATE_STR;
+                break;
+			}
+			$_params[] = filter_input(INPUT_POST, $param, $type);
+		}
+		
+		return $_params;
+	}
   }

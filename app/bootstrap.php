@@ -1,6 +1,10 @@
 <?php
   error_reporting(1);
 
+  /**
+   * Entering PHP Command Line
+   */
+
   if('cli' == php_sapi_name()){
     if($argc != 3){
       die('Incomplete parameters');
@@ -22,6 +26,8 @@
   require_once 'config/config.php';
 
   require_once 'helpers/autoload.php';
+  
+  //require_once 'packages/autoload.php';
   
   //Load Libraries
   spl_autoload_register(function($className){

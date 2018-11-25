@@ -9,6 +9,9 @@
   //Parse in Configuration file
   $config = parse_ini_file('config.ini');
   extract($config);
+  /**
+   * APPLICATION SETTINGS
+   */
   //App Root
   define('APP_ROOT', dirname(dirname(__FILE__)) . '/');
 
@@ -31,7 +34,9 @@
   //Site name
   define('APP_NAME', $app);
 
-
+  /**
+   * DATABASE SETTINGS
+   */
   //Database Server Name
   define('DB_HOST',  $host);
 

@@ -5,6 +5,6 @@
   //Read the content of folder and require functions
   foreach ($iterator as $fileinfo) {
       if (!$fileinfo->isDot() && ($fileinfo->getFilename() != 'autoload.php')) {
-          require_once "{$fileinfo->getFilename()}";
+          echo "{$fileinfo->getFilename()}/entry.php"; echo '<br>';
       }
   }

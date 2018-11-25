@@ -38,13 +38,7 @@
    */
   function _inc($file, $require = false){
     if($require !== true){
-      $success = include APP_ROOT . '/views/_inc/' . $file . '.php';
-      if(!$success){
-        error([
-          'title' => 'File Not Found',
-          'description' => 'The path to file you are looking for does not exist'
-        ]);
-      }
+      include APP_ROOT . '/views/_inc/' . $file . '.php';
     }else{
       require APP_ROOT . '/views/_inc/' . $file . '.php';
     }

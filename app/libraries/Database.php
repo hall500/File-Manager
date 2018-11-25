@@ -14,6 +14,13 @@
     private $error;
     private static $instance = NULL;
 
+    public static function init(){
+      if(self::$instance == NULL){
+        self::$instance = new Database();
+      }
+      return self::$instance;
+    }
+    
     private function __construct(){
       $this->dbh = null;
       $this->host = DB_HOST;
@@ -21,13 +28,6 @@
       $this->pass = DB_PASS;
       $this->dbname = DB_NAME;
       $this->connect();
-    }
-
-    public static function init(){
-      if(self::$instance == NULL){
-        self::$instance = new Database();
-      }
-      return self::$instance;
     }
 
     private function connect(){
@@ -39,10 +39,7 @@
           $this->dbh->exec('SET NAMES "utf8"');
         }
         catch(PDOException $e){
-          error([
-            'title' => 'Database Error',
-            'description' => 'Unable to connect to database'
-          ]);
+          $this->error = $e->getMessage();
         }
       }
       if(!$this->dbh){
@@ -58,8 +55,10 @@
      * Query Database using prepared statements
      * @param String:$sql
      */
-    public function query(String $sql){
-      $this->stmt = $this->dbh->prepare($sql);
+    public function query($sql){
+      if($this->dbh){
+          $this->stmt = $this->dbh->prepare($sql);
+      }
     } 
 
     public function bind($param, $value, $type = null){
@@ -80,46 +79,34 @@
         }
       }
 
-      $this->stmt->bindValue($param, $value, $type);
+      if($this->stmt){
+          $this->stmt->bindValue($param, $value, $type);
+      }
     }
 
     public function execute(){
-      try{
-        $this->dbh->beginTransaction();
-        $this->stmt->execute();
-        $this->dbh->commit();
-        return $this->dbh->lastInsertId();
-      }catch(PDOException $e){
-        $this->dbh->rollback();
-        error([
-          'title' => 'Database Execution Error',
-          'description' => $e->getMessage()
-        ]);
+      if($this->stmt){
+          return $this->stmt->execute();
       }
     }
 
     public function resultSet(){
       $this->execute();
-      return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+      if($this->stmt){
+          return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+      }
     }
 
     public function single(){
       $this->execute();
-      return $this->stmt->fetch(PDO::FETCH_OBJ);
+      if($this->stmt){
+          return $this->stmt->fetch(PDO::FETCH_OBJ);
+      }
     }
 
     public function count(){
-      return $this->stmt->rowCount();
-    }
-
-    public function __destruct(){
-      $this->dbh = null;
-      $this->host = null;
-      $this->user = null;
-      $this->pass = null;
-      $this->dbname = null;
-      if(self::$instance != null){
-        self::$instance = null;
+      if($this->stmt){
+          return $this->stmt->rowCount();
       }
     }
   }

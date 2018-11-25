@@ -21,8 +21,9 @@
 			  $this->currentController = ucwords($url[0]);
 			  unset($url[0]);
 			}
-		  
+
 		  require_once(APP_ROOT . 'controllers/' . ucwords($this->currentController) . '.php');
+		  $this->currentController = $this->currentController . 'Controller';
 		  $this->currentController = new $this->currentController;
 		  
 		  //Check for Controller Method
