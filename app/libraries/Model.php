@@ -194,12 +194,5 @@
     public function page_count($total_rows = 0){
       return ceil($total_rows/$this->page_limit);
     }
-
-    public static function __callStatic($method, $args){
-      if (preg_match('/^findBy(.+)$/', $method, $matches)) {
-        var_dump($matches);
-        //return static::find(array('field' => $matches[1], 'value' => $args[0]));
-      }
-    }
    }
 

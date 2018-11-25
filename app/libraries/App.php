@@ -1,6 +1,6 @@
 <?php
 
-  class Core {
+  class App {
 		private static $instance = NULL;
 	  protected $currentController = 'Home';
 	  protected $currentMethod = 'index';
@@ -38,7 +38,7 @@
 			$this->params = $url ? array_values($url) : [];
 
 			$result = call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
-			//Core::debug($result, true);
+			//App::debug($result, true);
 	  }
 	  
 	  protected function getUrl(){

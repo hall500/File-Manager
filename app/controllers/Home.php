@@ -3,7 +3,6 @@
 
     public function __construct(){
       //Define All required models here
-      $this->user = $this->model('Users');
     }
 
     public function index(){

@@ -35,5 +35,5 @@
   });
 
   //Instantiate the Core
-  Core::instantiate();
+  App::instantiate();
 
