@@ -1,5 +1,5 @@
 <?php
-
+	
   class App {
 		private static $instance = NULL;
 	  protected $currentController = 'Home';
@@ -64,4 +64,3 @@
 			}
 		}
 	}
-	

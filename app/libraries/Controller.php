@@ -3,6 +3,7 @@
    * Base Controller Class
    * Loads Models and Views
    */
+
    abstract class Controller {
      /**
       * Defines the layout of the site to use
