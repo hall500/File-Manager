@@ -106,6 +106,7 @@
     }
 
     public function count(){
+      $this->execute();
       if($this->stmt){
           return $this->stmt->rowCount();
       }

@@ -21,9 +21,28 @@
 
     public function findbyid($id = null){
       if(!is_null($id)){
-          $sql = "SELECT * FROM $this->table WHERE id = $id";
+          $sql = "SELECT * FROM $this->table WHERE id=:id";
           $this->db->query($sql);
+          $this->db->bind(':id', $id);
           return $this->db->single();
+      }
+      return false;
+    }
+
+    public function findby($params = ['param' => 'id', 'value' => null], $return_val = 'single'){
+      $params_default = [
+        'param' => 'id'
+      ];
+      $params = array_merge($params_default, $params);
+      if(!is_null($params['value'])){  
+          $sql = "SELECT * FROM $this->table WHERE {$params['param']}=:{$params['param']}";
+          $this->db->query($sql);
+          $this->db->bind(':'. $params['param'], $params['value']);
+          if($return_val === 'multiple'){
+            return $this->db->resultSet();
+          }elseif($return_val === 'single'){
+            return $this->db->single();
+          }
       }
       return false;
     }
