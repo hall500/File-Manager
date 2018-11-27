@@ -1,13 +1,14 @@
 <?php
-  abstract class Widget {
+  class Widget {
     private $instance;
 
     private function __construct(){
+      echo "Widget class call";
     }
 
     public function init(){
       if(self::$instance == null){
-        self::$instance = new get_called_class();
+        self::$instance = new Widget();
       }
       return self::$instance;
     }

@@ -64,7 +64,7 @@
 			}
 		}
 
-		public static function widget($name, $params = []){
-
+		public static function widget($name = '', $params = []){
+			self::debug(get_declared_classes());
 		}
 	}
