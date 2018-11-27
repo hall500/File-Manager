@@ -5,15 +5,7 @@
    * Entering PHP Command Line
    */
 
-  if('cli' == php_sapi_name()){
-    if($argc != 3){
-      die('Incomplete parameters');
-    }
-
-    if(!isset($argv[2])){
-      die("Please specify a file name to create");
-    }
-    
+  if('cli' == php_sapi_name()){    
     chdir("../app/templates");
     $cmd = 'php handler.php ' . $argv[1] . ' ' . $argv[2];
     $command = escapeshellcmd($cmd);
@@ -25,7 +17,7 @@
   //Load Config
   require_once 'config/config.php';
 
-  require_once 'helpers/autoload.php';
+  require_once 'helpers/_autoload.php';
   
   //require_once 'packages/autoload.php';
   

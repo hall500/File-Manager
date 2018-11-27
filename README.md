@@ -1,12 +1,14 @@
 # KingQuick
-A lightweight, simple to use PHP framework
+A lightweight, simple to use PHP framework with CLI
 
 Get started with MVC quickly without having to bother much about the underlying code base.
 
 # USAGE
-Rename the file copy.htaccess to .htaccess
+Rename the file htaccess to .htaccess
 
 ![image of mvc framework](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/ModelViewControllerDiagram2.svg/1280px-ModelViewControllerDiagram2.svg.png)
+
+0. Edit the config.ini file and you are good to go.
 
 1. Create a folder named after the page being created. 
 In the created folder always start with an 'index.php' file
@@ -17,7 +19,7 @@ Note: This structure allows you to create subsections for the created page.
 
 2. Create a Controller File named after the created file
 For Example: for the 'home' page you created. You can create a corresponding controller
-in the controllers folder called 'HomeController.php'
+in the controllers folder called 'Home.php'
 Note: Don't forget to edit the Name of the class to the appropriate controller Name
 
 3. The libraries folder contains all files neccessary for the application to work which are neccesary for initializing the application
@@ -38,7 +40,7 @@ A lightweight PHP MVC framework for creating and deploying web applications quic
 Controller functions handle routing to pages as specified
 
 ## KingQuick CLI (KQCLI)
-All cli commands start with "php index.php parameters" accessed from root/web
+#### All cli commands start with "php index.php parameters" accessed from root/web
 To get started with KQCLI enter "cd web" in command line at the root folder of your app
 To create a new model
 parameters: -m ModelName   or -model ModelName

@@ -63,4 +63,8 @@
 				die();
 			}
 		}
+
+		public static function widget($name, $params = []){
+
+		}
 	}
