@@ -1,10 +1,11 @@
 <?php
 
   class HomeController extends Controller {
+    protected $layout = 'blank';
 
     public function __construct(){
       //Define All required models here
-      $this->user = $this->model('Users');
+      //$this->user = $this->model('Users');
     }
 
     public function index(){

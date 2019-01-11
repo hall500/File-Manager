@@ -1,5 +1,5 @@
 <?php
-  error_reporting(1);
+  //error_reporting(1);
 
   /**
    * Entering PHP Command Line
@@ -17,15 +17,14 @@
   //Load Config
   require_once 'config/config.php';
 
-  require_once 'helpers/_autoload.php';
-  
-  //require_once 'packages/autoload.php';
+  require_once 'helpers'. DIRECTORY_SEPARATOR .'_autoload.php';
   
   //Load Libraries
   spl_autoload_register(function($className){
-    require_once 'libraries/' . $className . '.php';
+    require_once 'base/' . $className . '.php';
   });
 
   //Instantiate the App
   App::instantiate();
+  App::debug(get_included_files(), true);
 

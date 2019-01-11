@@ -22,7 +22,7 @@ For Example: for the 'home' page you created. You can create a corresponding con
 in the controllers folder called 'Home.php'
 Note: Don't forget to edit the Name of the class to the appropriate controller Name
 
-3. The libraries folder contains all files neccessary for the application to work which are neccesary for initializing the application
+3. The base folder contains all files neccessary for the application to work which are neccesary for initializing the application
 
 4. The models folder contains all logic that runs on the application
 For example: A mail sender functionality could be saved as 'EmailSenderModel.php'

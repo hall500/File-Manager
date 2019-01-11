@@ -2,7 +2,6 @@
   /**
    * Base Model Class
    */
-
    class Model {
      protected $table = '';
      protected $db;

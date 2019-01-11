@@ -2,6 +2,7 @@
   /**
    * Setting up controller
    */
+  
   class AboutController extends Controller {
     /**
      * Models and Widgets are initialized Here

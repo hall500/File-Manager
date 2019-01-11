@@ -3,7 +3,7 @@
    * PDO Database Class
    * COnnects to database
    */
-  
+
   class Database {
     private $host;
     private $user;
