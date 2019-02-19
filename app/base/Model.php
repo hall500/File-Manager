@@ -121,7 +121,7 @@
       }
 
       if($this->db->execute()){
-        return $this->db->execute();
+        return true;
       }
       return false;
     }
