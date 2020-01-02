@@ -203,6 +203,16 @@
         if(!$this->db->execute()) return false;
     }	
 
+    public function put(Object $data){
+      $table = $this->describe();
+      foreach($table as $column){
+          if(isset($data->{$column})){
+              $this->{$column} = $data->{$column};
+          }
+      }
+      return $this->save();
+    }
+
     public function pagination($page = 0){
       if($page > 0){
         $page_diff = (($page * $this->page_limit) - $this->page_limit);
@@ -214,4 +224,3 @@
       return ceil($total_rows/$this->page_limit);
     }
    }
-

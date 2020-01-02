@@ -26,5 +26,4 @@
 
   //Instantiate the App
   App::instantiate();
-  App::debug(get_included_files(), true);
 

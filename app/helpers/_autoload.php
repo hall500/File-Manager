@@ -1,6 +1,4 @@
 <?php
-  
-  namespace app\helpers;
 
   //Declaring Directory Interator
   $iterator = new \DirectoryIterator(dirname(__FILE__));

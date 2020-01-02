@@ -1,22 +1,13 @@
 <?php
   class Request {
-    static private $instance = NULL;
-    private $_bodyParams;
+    private static $_bodyParams;
 
-    private function __construct(){}
-    
-    static public function get(){
-      if(self::$instance == NULL){
-        self::$instance = new Request;
-      }
-      return self::$instance;
-    }
     /**
      * Returns the method of the current request (e.g. GET, POST, HEAD, PUT, PATCH, DELETE).
      * @return string request method, such as GET, POST, HEAD, PUT, PATCH, DELETE.
      * The value returned is turned into upper case.
      */
-    public function getMethod()
+    public static function getMethod()
     {
 
         if (isset($_SERVER['REQUEST_METHOD'])) {
@@ -26,33 +17,41 @@
         return 'GET';
     }
 
-    public function post($name = null, $defaultValue = null){
+    public static function post($name = null, $defaultValue = null){
       if(is_null($name)){
-        $this->getBodyParams();
-        return $this->_bodyParams;
+        self::getBodyParams();
+        return self::validate_post();
       }
-      return $this->getBodyParam($name, $defaultValue);
+      return self::getBodyParam($name, $defaultValue);
     }
 
-    public function getBodyParams(){
-      if($this->getMethod() == 'POST'){
-        $this->_bodyParams = $_POST;
+    public static function getBodyParams(){
+      if(self::getMethod() == 'POST'){
+        /* if(!empty($_POST)){
+          $post = [];
+          foreach($_POST as $key => $data){
+            $post[$key] = trim($data); //trim(htmlspecialchars($data));
+          }
+        } */
+        self::$_bodyParams = $_POST;
       }
     }
 
-    public function has_post(){
-      if(!empty($this->post())){
+    public static function has_post(){
+      //$csrf = NoCSRF::check( 'token', $_POST, true, 60*10, false );
+      if(!empty($_POST)){
         return true;
       }
       return false;
     }
 
-    public function setBodyParams($values){
-      $this->_bodyParams = $values;
+    public static function setBodyParams($values){
+      self::$_bodyParams = $values;
     }
 
-    public function getBodyParam($name = null, $defaultValue = null){
-      $params = $this->getBodyParams();
+    public static function getBodyParam($name = null, $defaultValue = null){
+      self::getBodyParams();
+      $params = self::validate_post();
 
       if(is_object($params)){
         try{
@@ -65,22 +64,19 @@
       return isset($params[$name]) ? $params[$name] : $defaultValue;
     }
 	
-	public function validate(){
-		foreach($this->_bodyParams as $param){
-			switch(true){
-				case is_int($param): 
-				$type = FILTER_VALIDATE_INT;
-                break;
-				case is_float($param): 
-				$type = FILTER_VALIDATE_FLOAT;
-                break;
-				default: 
-				$type = FILTER_VALIDATE_STR;
-                break;
-			}
-			$_params[] = filter_input(INPUT_POST, $param, $type);
-		}
-		
-		return $_params;
-	}
+    protected static function validate_post(){
+      foreach(self::$_bodyParams as $key => $param){
+        switch(true){
+          case is_int($param): 
+            $param = filter_var($param, FILTER_VALIDATE_FLOAT);
+          case is_float($param): 
+            $param = filter_var($param, FILTER_VALIDATE_INT);
+          default: 
+            $param = filter_var($param, FILTER_SANITIZE_STRING);
+        }
+        $_params[$key] = $param;
+      }
+      
+      return $_params;
+    }
   }

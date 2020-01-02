@@ -34,19 +34,31 @@
   //Site name
   define('APP_NAME', $app);
 
+  //Current App Script
+  define('APP_HOST', 'http://' . $_SERVER['HTTP_HOST']);
+
+  //CURRENT URL
+  define('CURRENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+
+  //Application entry point
+  define('APP_ENTRY', $entry);
+  
+  //Application entry point
+  define('APP_DEBUG', boolval($debug));
+
   /**
-   * DATABASE SETTINGS
-   */
+  * DATABASE SETTINGS
+  */
   //Database Server Name
-  define('DB_HOST',  $host);
+  define('DB_HOST', $host);
 
   //Database Name
-  define('DB_NAME',  $database);
+  define('DB_NAME', $database);
 
   //Database User Name
-  define('DB_USER',  $user);
+  define('DB_USER', $user);
 
   //Database Password
-  define('DB_PASS',  $password);
-  
+  define('DB_PASS', $password);
+
   unset($config);

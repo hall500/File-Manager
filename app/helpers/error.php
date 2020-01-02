@@ -11,6 +11,6 @@
        require_once APP_ROOT . 'views/_layout/'. $layout . '.php';
        exit();
      }else{
-       die('An Error occurred');
+       die('An Error occurred! Looks like you found a glitch!');
      }  
   }   

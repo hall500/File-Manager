@@ -105,9 +105,9 @@
          //Check if a specific path value is provided
          if(strpos($view, '/') === false){
 			     $class_name =  str_replace("Controller","",get_called_class());
-           $content = APP_ROOT . 'views/' . $class_name . '/' . $view . '.php';
+           $content = APP_ROOT . 'views/' . strtolower($class_name) . '/' . $view . '.php';
          }else{
-           $content = APP_ROOT . 'views/' . $view . '.php';
+           $content = APP_ROOT . 'views/' . strtolower($view) . '.php';
          }
        }
        
@@ -130,7 +130,7 @@
      * @param String $goto page to redirect to
      * @return Void
      */
-    protected function redirect($goto = './', $data = '', $extract = true){
+    protected function redirect($goto = '/', $data = '', $extract = true){
       if(!empty($data)){
         session('view_data', $data);
         session('view_extract', $extract);
@@ -139,7 +139,8 @@
         session_end('view_extract');
       }
 
-      header("Location: " . $goto);
+      //header("Location: " . $goto);
+      header("Location: " . APP_HOST . URL_ROOT . $goto);
       exit();
     }
    }
